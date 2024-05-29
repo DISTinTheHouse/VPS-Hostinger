@@ -26,7 +26,7 @@ SECRET_KEY = 'j&1LHh&^J.#&8RnGEt2VUMjrNiA6%%&bUf7#lM={5!.a3cD2{O'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'codecavas.app', 'www.codecavas.app']
 
 
 # Application definition
