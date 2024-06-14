@@ -18,6 +18,12 @@ class Colaborador(models.Model):
     supervisor = models.CharField(max_length=100, null=True, blank=True)  # Supervisor del colaborador
     notas = models.TextField(null=True, blank=True)  # Notas adicionales
     creado_en = models.DateTimeField(auto_now_add=True)
+    
+    # Roles
+    es_vendedor = models.BooleanField(default=False)
+    es_administrativo = models.BooleanField(default=False)
+    es_almacen = models.BooleanField(default=False)
+    tiene_acceso_total = models.BooleanField(default=False)
 
     def __str__(self):
         return self.correo

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'DM Serif Display', serif;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header, .card-footer {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        .btn-primary, .btn-info {
+            border-radius: 50px;
+            font-size: 1.2em;
+            padding: 10px 20px;
+        }
+        .product-image {
+            max-height: 150px;
+            object-fit: cover;
+        }
+        .modal-content {
+            border-radius: 15px;
+        }
+        .modal-header {
+            background-color: #343a40;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .modal-footer {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        .modal-body {
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+        }
+        .modal-title {
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3">Lista de Productos</h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for producto in productos %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            {% if producto.imagen %}
+                                <img src="{{ producto.imagen.url }}" class="card-img-top product-image" alt="{{ producto.nombre }}">
+                            {% else %}
+                                <img src="path/to/default/image.jpg" class="card-img-top product-image" alt="Imagen no disponible">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ producto.nombre }}</h5>
+                                <p class="card-text"><strong>Marca:</strong> {{ producto.marca }}</p>
+                                <p class="card-text"><strong>Modelo:</strong> {{ producto.modelo }}</p>
+                                <p class="card-text"><strong>Año:</strong> {{ producto.anio }}</p>
+                                <p class="card-text"><strong>Precio:</strong> ${{ producto.precio_venta }}</p>
+                                <p class="card-text"><strong>Stock:</strong> {{ producto.stock }}</p>
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detalleModal{{ producto.id }}">
+                                    Detalles
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="detalleModal{{ producto.id }}" tabindex="-1" aria-labelledby="detalleModalLabel{{ producto.id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="detalleModalLabel{{ producto.id }}">{{ producto.nombre }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {% if producto.imagen %}
+                                        <img src="{{ producto.imagen.url }}" class="img-fluid mb-3" alt="{{ producto.nombre }}">
+                                    {% else %}
+                                        <img src="path/to/default/image.jpg" class="img-fluid mb-3" alt="Imagen no disponible">
+                                    {% endif %}
+                                    <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
+                                    <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+                                    <p><strong>Marca:</strong> {{ producto.marca }}</p>
+                                    <p><strong>Modelo:</strong> {{ producto.modelo }}</p>
+                                    <p><strong>Año:</strong> {{ producto.anio }}</p>
+                                    <p><strong>Número de Parte:</strong> {{ producto.numero_parte }}</p>
+                                    <p><strong>Costo al Proveedor:</strong> ${{ producto.costo_proveedor }}</p>
+                                    <p><strong>Precio de Venta:</strong> ${{ producto.precio_venta }}</p>
+                                    <p><strong>Stock:</strong> {{ producto.stock }}</p>
+                                    <p><strong>Modelos Compatibles:</strong> {{ producto.compatible_modelos }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'agregar_producto' %}" class="btn btn-primary">Agregar Producto</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
