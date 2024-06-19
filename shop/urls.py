@@ -7,5 +7,6 @@ urlpatterns = [
     path('lista_productos/', views.lista_productos, name='lista_productos'),
     path('agregar_varios/', views.agregar_varios_productos, name='agregar_varios_productos'),
     # --- PEDIDOS ---
+    path('pedidos/', views.pedidos, name='pedidos'),
     path('agregar_pedido/', views.agregar_pedido, name='agregar_pedido'),
 ]

@@ -5,7 +5,8 @@ import pandas as pd
 # FORMS
 from .forms import ProductoForm, PedidoForm
 # MODELS
-from .models import Producto
+from .models import Producto, Pedido
+
 
 
 #------------------------------------------
@@ -59,6 +60,12 @@ def lista_productos(request):
 
 #------------------------------------------
 # -- PEDIDOS --
+
+@login_required
+def pedidos(request):
+    pedidos = Pedido.objects.all()  # Obtener todos los pedidos
+    return render(request, 'pedidos/pedidos.html', {'pedidos': pedidos})
+
 
 @login_required
 def agregar_pedido(request):

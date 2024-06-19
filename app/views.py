@@ -14,8 +14,10 @@ from .forms import ColaboradorForm
 
 
 #CODE CANVAS SOLUTIONS HTML . . .
+@login_required
 def index(request):
-    return render(request, 'index.html')
+    colaborador = Colaborador.objects.get(correo=request.user.email)
+    return render(request, 'index.html', {'colaborador': colaborador})
 
 def clientes(request):
     return render(request, 'clientes.html')
