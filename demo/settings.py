@@ -125,7 +125,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-STATIC_ROOT = '/usr/local/lsws/Example/html/demo/public/static'
+STATIC_ROOT = '/usr/local/lsws/Example/html/demo/public/static/admin'
 
 #MENSAJES:
 from django.contrib.messages import constants as messages
